@@ -212,6 +212,24 @@ pre { background:var(--side); border:1px solid var(--edge); border-radius:12px; 
   .cta-box h2 { font-size:38px; }
   .footer-row { flex-direction:column; }
 }
+
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:22px}
+.step{background:var(--card);border:1px solid var(--edge);border-radius:16px;padding:20px}
+.step b{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--white);color:var(--ink);font-size:13px;margin-bottom:12px}
+.step h3{margin:0 0 6px;font-size:17px;letter-spacing:-.02em}
+.step p,.faq-a{margin:0;color:var(--muted);font-size:13px;line-height:1.6}
+.step p b{display:inline;width:auto;height:auto;background:none;color:var(--text);font-size:inherit;margin:0}
+.faq{margin-top:22px;display:grid;gap:10px}
+.faq details{background:var(--card);border:1px solid var(--edge);border-radius:14px;padding:0 18px}
+.faq summary{cursor:pointer;list-style:none;padding:16px 0;font-weight:700;font-size:14px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";float:right;color:var(--muted)}
+.faq details[open] summary::after{content:"\2013"}
+.faq-a{padding:0 0 16px}
+.faq-a a{color:var(--text);text-decoration:underline}
+.hint{margin:14px 0 0;font-size:12px;color:var(--muted);max-width:520px;line-height:1.55}
+.hint b{color:var(--text)}
+.dl-meta{margin-top:10px;font-size:12px;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -220,7 +238,7 @@ pre { background:var(--side); border:1px solid var(--edge); border-radius:12px; 
     <div class="shell nav">
       <a href="#top" class="brand" aria-label="ChromaLift home"><span class="logo" aria-hidden="true"></span><span>ChromaLift</span></a>
       <nav class="navlinks" aria-label="Primary">
-        <a href="#features">Features</a><a href="#lab">Live lab</a><a href="#games">Games</a><a href="#notes">Notes</a>
+        <a href="#features">Features</a><a href="#lab">Live lab</a><a href="#games">Games</a><a href="#notes">Notes</a><a href="#faq">FAQ</a>
       </nav>
       <div class="nav-actions"><button class="btn ghost small" data-modal="source">Open source</button><a class="btn primary small" href="#download">Get ChromaLift</a></div>
     </div>
@@ -237,7 +255,7 @@ pre { background:var(--side); border:1px solid var(--edge); border-radius:12px; 
           <div class="hero-notes"><span>100% free & open source</span><span>No subscription</span><span>Windows 10/11</span></div>
         </div>
         <div class="window" aria-label="ChromaLift app preview">
-          <div class="window-top"><div class="window-brand"><span class="logo" style="width:23px;height:23px;border-radius:7px;box-shadow:inset 0 0 0 2px var(--card)"></span>ChromaLift <span style="color:var(--muted);font-weight:600">0.2.0</span></div><div class="window-dots"><i></i><i></i><i></i></div></div>
+          <div class="window-top"><div class="window-brand"><span class="logo" style="width:23px;height:23px;border-radius:7px;box-shadow:inset 0 0 0 2px var(--card)"></span>ChromaLift <span style="color:var(--muted);font-weight:600" id="verTag"></span></div><div class="window-dots"><i></i><i></i><i></i></div></div>
           <div class="window-main">
             <aside class="window-side">
               <div class="mini-nav active">◐ &nbsp; Display</div><div class="mini-nav">✦ &nbsp; Looks</div><div class="mini-nav">✛ &nbsp; Crosshair</div><div class="mini-nav">▭ &nbsp; Resolution</div><div class="mini-nav">☰ &nbsp; Profiles</div><div class="mini-nav">▲ &nbsp; Boost</div><div class="mini-nav">◎ &nbsp; Network</div><div class="mini-nav">☾ &nbsp; Comfort</div><div class="mini-nav">⚙ &nbsp; Settings</div>
@@ -291,7 +309,7 @@ pre { background:var(--side); border:1px solid var(--edge); border-radius:12px; 
               <div class="lab-footer"><div class="pill-row"><button class="pill active" data-preset="Natural">Natural</button><button class="pill" data-preset="Vivid">Vivid</button><button class="pill" data-preset="Night Owl">Night Owl</button><button class="pill" data-preset="Neon">Neon</button></div><button class="btn small" id="resetLook">Reset</button></div>
             </div>
             <div id="modeCrosshair" class="mode-panel" style="display:none"><div class="slider-list"><div><div class="slider-meta"><span>Size</span><span id="sizeVal">6</span></div><input id="size" type="range" min="3" max="12" value="6"></div><div><div class="slider-meta"><span>Gap</span><span id="gapVal">3</span></div><input id="gap" type="range" min="0" max="10" value="3"></div><div><div class="slider-meta"><span>Thickness</span><span id="thickVal">2</span></div><input id="thick" type="range" min="1" max="4" value="2"></div><div><div class="slider-meta"><span>Colour</span><span id="colorVal">#00FF66</span></div><div class="pill-row" id="crossColors"><button class="pill active" data-color="#00ff66">Lime</button><button class="pill" data-color="#00e5ff">Cyan</button><button class="pill" data-color="#ff3b3b">Red</button><button class="pill" data-color="#ffd400">Yellow</button></div></div></div></div>
-            <div id="modeNetwork" class="mode-panel" style="display:none"><div class="big-card" style="margin-top:0"><div class="big-card-label">DEMO CONNECTION</div><div class="sat-number" id="pingVal">23 ms</div><div style="color:var(--muted);font-size:11px">Stable route · 0% packet loss</div></div><div style="display:flex;gap:8px;margin-top:12px"><button class="btn accent small" id="runPing">Run test</button><button class="btn small" id="flushDns">Flush DNS</button></div><p style="font-size:11px;color:var(--muted);margin:12px 0 0">In the desktop app you can enter a game server IP and run a real connection check.</p></div>
+            <div id="modeNetwork" class="mode-panel" style="display:none"><div class="big-card" style="margin-top:0"><div class="big-card-label">SIMULATED DEMO</div><div class="sat-number" id="pingVal">23 ms</div><div style="color:var(--muted);font-size:11px">Stable route · 0% packet loss</div></div><div style="display:flex;gap:8px;margin-top:12px"><button class="btn accent small" id="runPing">Run test</button><button class="btn small" id="flushDns">Flush DNS</button></div><p style="font-size:11px;color:var(--muted);margin:12px 0 0">In the desktop app you can enter a game server IP and run a real connection check.</p></div>
           </div>
           <div class="panel">
             <div class="lab-preview" id="labPreview">
@@ -326,31 +344,40 @@ pre { background:var(--side); border:1px solid var(--edge); border-radius:12px; 
         <div class="section-head"><div><div class="section-kicker">Why ChromaLift</div><h2>More control. More visibility.</h2></div><p class="section-desc">Use one lightweight toolkit to tune the image, profiles, resolution, network checks and reversible Windows optimizations around the games you actually play.</p></div>
         <div class="why">
           <div class="large-note"><h3>Change almost everything you notice.</h3><p>Push saturation, tune contrast and gamma, lift dark areas, save per-game looks, change resolution and refresh rate, build a custom crosshair, test your route and apply reversible Windows tweaks.</p><div class="rule-list"><div class="rule"><strong>VIS</strong><span>Make colours pop and improve visual separation so enemies and important details stand out more clearly.</span></div><div class="rule"><strong>FPS</strong><span>Boost can change selected Windows settings, but actual FPS gains depend on your hardware and workload.</span></div><div class="rule"><strong>PING</strong><span>Run a plain-English connection test and watch live ping from the Network page.</span></div></div></div>
-          <div class="large-note"><h3>Built outside the game process.</h3><p>ChromaLift is designed as a Windows utility rather than a cheat or game modification. It does not inject code into your game process. That said, no software can honestly promise zero ban risk across every anti-cheat system, so always follow each game's rules.</p><div class="rule-list"><div class="rule"><strong>FREE</strong><span>No subscription or paid tier: the project is free and open source under MIT.</span></div><div class="rule"><strong>LOCAL</strong><span>Settings, logs and profiles stay on your PC instead of depending on a cloud profile.</span></div><div class="rule"><strong>SAFE</strong><span>Resolution changes have an auto-revert window, Boost changes are reversible, and Emergency colour reset is built in.</span></div></div></div>
+          <div class="large-note"><h3>Built outside the game process.</h3><p>ChromaLift is designed as a Windows utility rather than a cheat or game modification. It does not inject code into your game process. That said, no software can honestly promise zero ban risk across every anti-cheat system, so always follow each game's rules.</p><div class="rule-list"><div class="rule"><strong>FREE</strong><span>No subscription or paid tier: the project is free and open source under MIT.</span></div><div class="rule"><strong>LOCAL</strong><span>Settings, logs and profiles stay on your PC. The only time ChromaLift goes online by itself is an optional update check with GitHub.</span></div><div class="rule"><strong>SAFE</strong><span>Resolution changes have an auto-revert window, Boost changes are reversible, and Emergency colour reset is built in.</span></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="shell">
+        <div class="section-head"><div><div class="section-kicker">Install</div><h2>Three steps, no commands.</h2></div><p class="section-desc">If Windows shows a warning, that's expected. Here's what to click and why it appears.</p></div>
+        <div class="steps">
+          <div class="step"><b>1</b><h3>Download</h3><p>Press the download button below and save <b>ChromaLift.exe</b>. If a Setup installer is listed too, either one works.</p></div>
+          <div class="step"><b>2</b><h3>Open it</h3><p>Windows may show a blue <b>"Windows protected your PC"</b> screen. Click <b>More info</b>, then <b>Run anyway</b>. It appears because the app isn't code-signed (certificates cost money), not because anything is wrong.</p></div>
+          <div class="step"><b>3</b><h3>Pick your game</h3><p>Open <b>Looks</b>, choose your game under <b>Game profiles</b>, and play in windowed or borderless mode. It switches on automatically when the game is in front.</p></div>
+        </div>
+        <div class="faq">
+          <details><summary>Is it safe?</summary><div class="faq-a">The whole project is open source, so anyone can read exactly what it does. Antivirus tools sometimes flag new, unsigned apps they haven't seen before. If you'd rather not trust a download, you can build it yourself from the source code.</div></details>
+          <details><summary>Will I get banned?</summary><div class="faq-a">ChromaLift doesn't inject into or read your game. It changes your display's colour output and can draw a crosshair in a separate window. No software can honestly promise zero risk with every anti-cheat system, so check your game's rules. If you're unsure about a game, skip the crosshair overlay there.</div></details>
+          <details><summary>Does it work in fullscreen?</summary><div class="faq-a">Colour effects work in windowed and borderless games. Exclusive fullscreen may ignore saturation, although the tone controls (brightness, contrast, gamma, blacks) often still work.</div></details>
+          <details><summary>How do I undo everything?</summary><div class="faq-a">Boost has an Undo button. Settings has an Emergency colour reset. If colours ever look wrong, run <b>ChromaLift.exe --reset</b>. Closing the app also returns your colours to normal.</div></details>
+          <details><summary>Does it collect any data?</summary><div class="faq-a">No. Your settings and profiles stay on your PC. The only time it goes online by itself is an optional check for new versions, which you can turn off in Settings. The connection test only contacts the address you choose.</div></details>
+          <details><summary>Are the game profiles pro settings?</summary><div class="faq-a">No. They're starting points tuned around what each game looks like (foliage, dark corners, enemy contrast). Adjust them to your monitor and eyes.</div></details>
+          <details><summary>Will Boost raise my FPS?</summary><div class="faq-a">It removes overhead, such as power throttling and background load, so you may see a small gain. Results depend on your PC, and your in-game graphics settings matter more.</div></details>
+          <details><summary>Is it really free?</summary><div class="faq-a">Yes. No ads, no subscription, no paid tier. It's MIT licensed, so it stays free for everyone.</div></details>
         </div>
       </div>
     </section>
 
     <section class="cta" id="download">
-      <div class="shell"><div class="cta-box"><div><div class="section-kicker">DOWNLOAD · WINDOWS</div><h2>Get ChromaLift on your PC.</h2><p>One click. No Python, no ZIP and no setup commands. Download the standalone Windows app, run it, and ChromaLift is ready.</p><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px"><a class="btn accent" href="ChromaLift.exe" download="ChromaLift.exe">Download ChromaLift.exe</a></div></div><div style="min-width:260px;padding:18px;border:1px solid var(--edge);border-radius:15px;background:var(--side)"><div class="section-kicker">Simple</div><div style="font-size:13px;font-weight:800;margin:8px 0 4px">Download · Run · Play</div><p style="margin:0;color:var(--muted);font-size:11px">Standalone Windows executable. Python is not required for normal users.</p></div></div></div>
+      <div class="shell"><div class="cta-box"><div><div class="section-kicker">DOWNLOAD · WINDOWS</div><h2>Get ChromaLift on your PC.</h2><p>One click. No Python, no ZIP and no setup commands. Download the standalone Windows app, run it, and ChromaLift is ready.</p><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px"><a class="btn accent" id="dlBtn" href="ChromaLift.exe" download="ChromaLift.exe">Download ChromaLift.exe</a><a class="btn" id="dlSetup" href="#" style="display:none">Installer (Setup)</a></div><div class="dl-meta" id="dlMeta">Windows 10/11 · 64-bit · free</div><p class="hint"><b>Windows shows a blue warning?</b> Click <b>More info</b>, then <b>Run anyway</b>. It appears because the app isn't code-signed.</p></div><div style="min-width:260px;padding:18px;border:1px solid var(--edge);border-radius:15px;background:var(--side)"><div class="section-kicker">Simple</div><div style="font-size:13px;font-weight:800;margin:8px 0 4px">Download · Run · Play</div><p style="margin:0;color:var(--muted);font-size:12px;line-height:1.55">A standalone Windows app. No Python or extra software needed.</p></div></div></div>
     </section>
   </main>
 
-  <footer><div class="shell footer-row"><div>ChromaLift · independent project · not affiliated with any game company.</div><div class="footer-links"><a href="#features">Features</a><a href="#lab">Demo</a><a href="#notes">Good to know</a><button class="btn ghost small" data-modal="source">Source & license</button></div></div></footer>
+  <footer><div class="shell footer-row"><div>ChromaLift · free &amp; open source (MIT) · independent project, not affiliated with any game or software company. Game names belong to their owners.</div><div class="footer-links"><a href="#features">Features</a><a href="#faq">FAQ</a><a href="#notes">Good to know</a><a href="https://github.com/chromalifts/ChromaLift" target="_blank" rel="noopener">Source</a><a href="https://github.com/chromalifts/ChromaLift/issues/new/choose" target="_blank" rel="noopener">Report a bug</a></div></div></footer>
 
-  <div class="modal" id="modalSource" role="dialog" aria-modal="true" aria-labelledby="sourceTitle"><div class="modal-card"><div class="modal-head"><div><div class="section-kicker">Project</div><h3 id="sourceTitle">ChromaLift is open source.</h3></div><button class="x" data-close>×</button></div><p style="color:var(--muted);font-size:13px">The project you provided includes the Python application, build script, installer definition, icon and MIT license.</p><pre>ChromaLift-project/
-├─ chromalift.py
-├─ build.bat
-├─ installer.iss
-├─ icon.ico
-├─ requirements.txt
-├─ README.md
-└─ LICENSE</pre></div></div>
-
-  <div class="modal" id="modalBuild" role="dialog" aria-modal="true" aria-labelledby="buildTitle"><div class="modal-card"><div class="modal-head"><div><div class="section-kicker">Windows build</div><h3 id="buildTitle">Build the desktop app.</h3></div><button class="x" data-close>×</button></div><p style="color:var(--muted);font-size:13px">The provided README instructs users to install Python 3.10+ and run the included build script. Inno Setup can then compile the installer.</p><pre>1. Install Python 3.10+
-2. Run build.bat
-3. Optional: install Inno Setup
-4. Compile installer.iss</pre><button class="btn accent" data-close>Got it</button></div></div>
+  <div class="modal" id="modalSource" role="dialog" aria-modal="true" aria-labelledby="sourceTitle"><div class="modal-card"><div class="modal-head"><div><div class="section-kicker">Project</div><h3 id="sourceTitle">ChromaLift is open source.</h3></div><button class="x" data-close>×</button></div><p style="color:var(--muted);font-size:13px;line-height:1.6">Everything is MIT licensed. Read the code, report a bug, suggest a feature, or build it yourself. It will stay free for everyone.</p><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px"><a class="btn accent" href="https://github.com/chromalifts/ChromaLift" target="_blank" rel="noopener">View source on GitHub</a><a class="btn" href="https://github.com/chromalifts/ChromaLift/issues/new/choose" target="_blank" rel="noopener">Report a bug</a><a class="btn" href="https://github.com/chromalifts/ChromaLift/releases" target="_blank" rel="noopener">All versions</a></div></div></div>
   <div class="toast" id="toast">Done</div>
 </div>
 <script>
@@ -398,6 +425,23 @@ $$('[data-close]').forEach(btn=>btn.addEventListener('click',()=>btn.closest('.m
 $$('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open')}));
 document.addEventListener('keydown',e=>{if(e.key==='Escape') $$('.modal.open').forEach(m=>m.classList.remove('open'));});
 updateLooks(); updateCross();
+
+(function(){
+  const REPO='chromalifts/ChromaLift';
+  const btn=$('#dlBtn'), setup=$('#dlSetup'), meta=$('#dlMeta'), ver=$('#verTag');
+  fetch('https://api.github.com/repos/'+REPO+'/releases/latest',{headers:{Accept:'application/vnd.github+json'}})
+    .then(r=>r.ok?r.json():Promise.reject())
+    .then(rel=>{
+      const assets=rel.assets||[];
+      const exe=assets.find(x=>/^ChromaLift\.exe$/i.test(x.name));
+      const inst=assets.find(x=>/setup\.exe$/i.test(x.name));
+      const tag=(rel.tag_name||'').replace(/^v/,'');
+      if(exe){btn.href=exe.browser_download_url; btn.removeAttribute('download');}
+      if(inst){setup.href=inst.browser_download_url; setup.style.display='';}
+      if(tag&&ver) ver.textContent=tag;
+      if(tag&&meta) meta.textContent='Version '+tag+(exe?' · '+Math.round(exe.size/1048576)+' MB':'')+' · Windows 10/11 · free';
+    }).catch(()=>{});
+})();
 </script>
 </body>
 </html>
